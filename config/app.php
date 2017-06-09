@@ -181,6 +181,7 @@ return [
          * Third-Party Service Providers
          */
         Webpatser\Countries\CountriesServiceProvider::class,
+        Zizaco\Entrust\EntrustServiceProvider::class,
 
     ],
 
@@ -232,6 +233,7 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
 
         'Countries' => Webpatser\Countries\CountriesFacade::class,
+        'Entrust'   => Zizaco\Entrust\EntrustFacade::class,
 
     ],
 
