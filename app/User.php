@@ -4,10 +4,11 @@ namespace App;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use App\Support\Authorization\AuthorizationUserTrait;
 
 class User extends Authenticatable
 {
-    use Notifiable;
+    use Notifiable,AuthorizationUserTrait;
 
     /**
      * The database table used by the model.
@@ -36,4 +37,9 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function socialNetworks()
+    {
+        return $this->hasOne(UserSocialNetworks::class, 'user_id');
+    }
 }

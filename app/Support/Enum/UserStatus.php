@@ -1,6 +1,6 @@
 <?php
 
-namespace Vanguard\Support\Enum;
+namespace App\Support\Enum;
 
 class UserStatus
 {

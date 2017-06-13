@@ -1,10 +1,10 @@
 <?php
 
-namespace Vanguard\Support\Authorization;
+namespace App\Support\Authorization;
 
 
-use Vanguard\Role;
-use Vanguard\User;
+use App\Role;
+use App\User;
 use Cache;
 
 /**

@@ -182,7 +182,8 @@ return [
          */
         Webpatser\Countries\CountriesServiceProvider::class,
         Zizaco\Entrust\EntrustServiceProvider::class,
-
+        Collective\Html\HtmlServiceProvider::class,
+        anlutro\LaravelSettings\ServiceProvider::class,
     ],
 
     /*
@@ -205,6 +206,7 @@ return [
         'Broadcast' => Illuminate\Support\Facades\Broadcast::class,
         'Bus' => Illuminate\Support\Facades\Bus::class,
         'Cache' => Illuminate\Support\Facades\Cache::class,
+        'Input' => Illuminate\Support\Facades\Input::class,
         'Config' => Illuminate\Support\Facades\Config::class,
         'Cookie' => Illuminate\Support\Facades\Cookie::class,
         'Crypt' => Illuminate\Support\Facades\Crypt::class,
@@ -234,6 +236,9 @@ return [
 
         'Countries' => Webpatser\Countries\CountriesFacade::class,
         'Entrust'   => Zizaco\Entrust\EntrustFacade::class,
+        'Form' => Collective\Html\FormFacade::class,
+        'HTML' => Collective\Html\HtmlFacade::class,
+        'Settings' => anlutro\LaravelSettings\Facade::class,
 
     ],
 

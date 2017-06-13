@@ -1,6 +1,6 @@
 <?php
 
-namespace Vanguard\Support\Authorization;
+namespace App\Support\Authorization;
 
 
 use Cache;
