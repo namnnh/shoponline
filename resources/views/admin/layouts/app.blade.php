@@ -51,7 +51,7 @@
                         </a>
                         <ul class="dropdown-menu">
                             <li>
-                                <a href="{{ route('profile') }}">
+                                <a href="#">
                                     <i class="fa fa-user"></i>
                                     @lang('app.my_profile')
                                 </a>
@@ -65,7 +65,7 @@
                                 </li>
                             @endif
                             <li>
-                                <a href="{{ route('auth.logout') }}">
+                                <a href="#">
                                     <i class="fa fa-sign-out"></i>
                                     @lang('app.logout')
                                 </a>
@@ -77,7 +77,7 @@
         </div>
     </nav>
 
-    @include('partials.sidebar')
+    @include('admin.partials.sidebar')
 
     <div id="page-wrapper">
         <div class="container-fluid">

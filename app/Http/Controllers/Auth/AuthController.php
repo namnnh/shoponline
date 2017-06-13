@@ -22,9 +22,25 @@ class AuthController extends Controller
     }
 
     public function postLogin(LoginRequest $request){
+         $throttles = settings('throttle_enabled');
          $to = $request->has('to') ? "?to=" . $request->get('to') : '';
          $credentials = $this->getCredentials($request);
-         dd(Auth::validate($credentials) );
+         if (! Auth::validate($credentials)) {
+            return redirect()->to('admin/login' . $to)
+                ->withErrors(trans('auth.failed'));
+         }
+         $user = Auth::getProvider()->retrieveByCredentials($credentials);
+         Auth::login($user, settings('remember_me') && $request->get('remember'));
+         return $this->handleUserWasAuthenticated($request, $throttles, $user);
+    }
+
+    protected function handleUserWasAuthenticated(Request $request, $throttles, $user)
+    {
+        if ($request->has('to')) {
+            return redirect()->to($request->get('to'));
+        }
+
+        return redirect()->intended();
     }
 
     protected function getCredentials(Request $request)

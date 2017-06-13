@@ -5,11 +5,14 @@ namespace App;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use App\Support\Authorization\AuthorizationUserTrait;
+use Laracasts\Presenter\PresentableTrait;
+use App\Presenters\UserPresenter;
 
 class User extends Authenticatable
 {
-    use Notifiable,AuthorizationUserTrait;
+    use Notifiable,AuthorizationUserTrait,PresentableTrait;
 
+    protected $presenter = UserPresenter::class;
     /**
      * The database table used by the model.
      *
