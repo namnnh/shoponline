@@ -27,6 +27,10 @@ Route::group(['middleware' => 'auth'], function () {
         'as' => 'dashboard',
         'uses' => 'DashboardController@index'
     ]);
+    Route::get('user', [
+        'as' => 'user.list',
+        'uses' => 'Admin\UsersController@index'
+    ]);
 });
 
 

@@ -4,9 +4,11 @@ namespace App;
 
 use Config;
 use Illuminate\Database\Eloquent\Model;
+use App\Support\Authorization\AuthorizationRoleTrait;
 
 class Role extends Model
 {
+    use AuthorizationRoleTrait;
 
     /**
      * The database table used by the model.
