@@ -20,6 +20,7 @@ Route::get('/category/{category}','CategoryController@show');
 Route::get('/cart','cartController@index');
 
 Route::get('/admin/login', 'Auth\AuthController@getLogin');
+
 Route::post('/admin/login', 'Auth\AuthController@postLogin');
 
 Route::group(['middleware' => 'auth'], function () {
@@ -27,7 +28,7 @@ Route::group(['middleware' => 'auth'], function () {
         'as' => 'dashboard',
         'uses' => 'DashboardController@index'
     ]);
-    Route::get('user', [
+    Route::get('/admin/user', [
         'as' => 'user.list',
         'uses' => 'Admin\UsersController@index'
     ]);

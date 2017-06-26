@@ -1,4 +1,7 @@
-@extends('_particles.master') @section('css') @endsection @section('content')
+@extends('_particles.master') 
+@section('css') 
+@endsection 
+@section('content')
 <div class="container main-container headerOffset">
     @include('_particles._breadcrumb')
     <div class="row">
@@ -155,7 +158,8 @@
     <div style="clear:both"></div>
 </div>
 <div class="gap"> </div>
-@endsection @section('script')
+@endsection 
+@section('script')
 <!-- include carousel slider plugin  -->
 <script src="{{URL::asset('assets/js/owl.carousel.min.js')}}"></script>
 @endsection

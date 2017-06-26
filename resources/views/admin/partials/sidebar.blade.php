@@ -15,7 +15,7 @@
                 </a>
             </li>
             <li class="{{ Request::is('user*') ? 'active open' : ''  }}">
-                <a href="#" class="{{ Request::is('user*') ? 'active' : ''  }}">
+                <a href="{{route('user.list')}}" class="{{ Request::is('user*') ? 'active' : ''  }}">
                     <i class="fa fa-users fa-fw"></i> @lang('app.users')
                 </a>
             </li>

@@ -17,7 +17,6 @@ class AuthController extends Controller
 
     public function getLogin(){
         $socialProviders = config('auth.social.providers');
-
         return view('admin.auth.login', compact('socialProviders'));
     }
 
