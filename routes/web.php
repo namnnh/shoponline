@@ -46,6 +46,39 @@ Route::group(['middleware' => 'auth'], function () {
         'as' => 'admin.user.store',
         'uses' => 'Admin\UsersController@store'
     ]);
+
+    Route::get('/admin/user/{user}/edit', [
+        'as' => 'admin.user.edit',
+        'uses' => 'Admin\UsersController@edit'
+    ]);
+
+    Route::get('/admin/user/{user}/show', [
+        'as' => 'admin.user.show',
+        'uses' => 'Admin\UsersController@view'
+    ]);
+
+    Route::put('/admin/user/{user}/update/details', [
+        'as' => 'admin.user.update.details',
+        'uses' => 'Admin\UsersController@updateDetails'
+    ]);
+
+    Route::put('/admin/user/{user}/update/login-details', [
+        'as' => 'admin.user.update.login-details',
+        'uses' => 'Admin\UsersController@updateLoginDetails'
+    ]);
+    Route::post('/admin/user/{user}/update/avatar', [
+        'as' => 'admin.user.update.avatar',
+        'uses' => 'Admin\UsersController@updateAvatar'
+    ]);
+    Route::post('/admin/user/{user}/update/avatar/external', [
+        'as' => 'admin.user.update.avatar.external',
+        'uses' => 'Admin\UsersController@updateAvatarExternal'
+    ]);
+
+    Route::post('/admin/user/{user}/update/social-networks', [
+        'as' => 'admin.user.update.socials',
+        'uses' => 'Admin\UsersController@updateSocialNetworks'
+    ]);
 });
 
 

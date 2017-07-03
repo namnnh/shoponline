@@ -2,6 +2,7 @@
 namespace App\Repositories\User;
 
 use App\User;
+use DB;
 
 class EloquentUser implements UserRepository
 {
@@ -49,5 +50,12 @@ class EloquentUser implements UserRepository
     {
         $roleId = is_array($roleId) ?: [$roleId];
         return $this->find($userId)->roles()->sync($roleId);
+    }
+
+    public function getUserSocialLogins($userId)
+    {
+        return DB::table('social_logins')
+            ->where('user_id', $userId)
+            ->get();
     }
 }

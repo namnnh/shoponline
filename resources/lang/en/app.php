@@ -49,6 +49,21 @@ return [
     'n_a' => 'N/A',
     'user_created' =>'User created successfully.',
     'user_updated' => 'User updated successfully.',
+    'edit_user' => 'Edit User',
+    'view_user' => 'View User',
+    'delete_user' => 'Delete User',
+    'please_confirm' => 'Please Confirm',
+    'are_you_sure_delete_user' => 'Are you sure that you want to delete this user?',
+    'yes_delete_him' => 'Yes, delete him!',
+    'edit_user_details' => 'Edit User Details',
+    'details' => 'Details',
+    'edit' => 'Edit',
+    'social_networks' => 'Social Networks',
+    'authentication' => 'Authentication',
+    'update_details' => 'Update Details',
+    'leave_blank_if_you_dont_want_to_change' => 'Leave blank if you don\'t want to change',
+    'change_photo' => 'Change photo',
+    'avatar' => 'Avatar',
 
 
 

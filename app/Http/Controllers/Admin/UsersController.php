@@ -4,11 +4,13 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\Admin\User\CreateUserRequest;
+use App\Http\Requests\Admin\User\UpdateDetailsRequest;
 use App\Http\Controllers\Controller;
 use App\Support\Enum\UserStatus;
 use App\Repositories\User\UserRepository;
 use App\Repositories\Country\CountryRepository;
 use App\Repositories\Role\RoleRepository;
+use App\User;
 
 
 class UsersController extends Controller
@@ -31,26 +33,45 @@ class UsersController extends Controller
     	return view('admin.user.list',compact('statuses','users'));
     }
 
-	public function create(CountryRepository $countryRepository, RoleRepository $roleRepository){
+	public function create(CountryRepository $countryRepository, RoleRepository $roleRepository)
+	{
 		$countries = $this->parseCountries($countryRepository);
 		$roles = $roleRepository->lists()->toArray();
 		$statuses = UserStatus::lists();
 		  return view('admin.user.add', compact('countries', 'roles', 'statuses'));
 	}
 
-	public function store(CreateUserRequest $request){
+	public function store(CreateUserRequest $request)
+	{
 		$data = $request->all() + ['status' => UserStatus::ACTIVE];
-		if (trim($data['username']) == '') {
+		if (trim($data['username']) == '') 
+		{
             $data['username'] = null;
         }
-
-		
 		$user = $this->users->create($data);
 		$this->users->setRole($user->id, $request->get('role'));
 		return redirect()->route('admin.user.list')
             ->withSuccess(trans('app.user_created'));
 	}
 
+	public function edit(User $user,CountryRepository $countryRepository, RoleRepository $roleRepository)
+	{
+		$edit = true;
+		$countries = $this->parseCountries($countryRepository);
+		$roles = $roleRepository->lists()->toArray();
+		$statuses = UserStatus::lists();
+		$socialLogins = $this->users->getUserSocialLogins($user->id);
+		$socials = $user->socialNetworks;
+		
+		return view('admin.user.edit',
+            compact('edit', 'user', 'countries', 'roles', 'statuses','socialLogins','socials'));
+	}
+
+	public function updateDetails(User $user, UpdateDetailsRequest $request)
+	{
+		return redirect()->back()
+            ->withSuccess(trans('app.user_updated'));
+	}
 	/**
 	* Private function
 	*/

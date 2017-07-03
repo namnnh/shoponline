@@ -49,7 +49,7 @@
                     @if ($edit)
                         <div class="col-md-4 avatar-source source-external"
                              data-url="{{ $updateUrl }}">
-                            <img src="{{ $user->gravatar() }}" class="img-circle">
+                            <img src="" class="img-circle">
                             <p>@lang('app.gravatar')</p>
                         </div>
                     @endif

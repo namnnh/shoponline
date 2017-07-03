@@ -32,4 +32,12 @@ interface UserRepository
      * @return mixed
      */
 	public function setRole($userId, $roleId);
+
+     /**
+     * Get all social login records for specified user.
+     *
+     * @param $userId
+     * @return mixed
+     */
+     public function getUserSocialLogins($userId);
 }
