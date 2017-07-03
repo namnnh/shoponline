@@ -45,4 +45,13 @@ class User extends Authenticatable
     {
         return $this->hasOne(UserSocialNetworks::class, 'user_id');
     }
+    public function setPasswordAttribute($value)
+    {
+        $this->attributes['password'] = bcrypt($value);
+    }
+
+    public function setBirthdayAttribute($value)
+    {
+        $this->attributes['birthday'] = trim($value) ?: null;
+    }
 }

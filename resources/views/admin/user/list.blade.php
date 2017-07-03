@@ -21,7 +21,7 @@
 	@include('admin.partials.messages')
 	<div class="row tab-search">
 	    <div class="col-md-2">
-	        <a href="#" class="btn btn-success" id="add-user">
+	        <a href="{{ route('admin.user.create') }}" class="btn btn-success" id="add-user">
 	            <i class="glyphicon glyphicon-plus"></i>
 	            @lang('app.add_user')
 	        </a>

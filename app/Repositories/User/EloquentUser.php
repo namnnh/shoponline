@@ -31,4 +31,23 @@ class EloquentUser implements UserRepository
 
         return $result;
     }
+
+    public function create(array $data)
+    {
+        if (! array_get($data, 'country_id')) {
+            $data['country_id'] = null;
+        }
+        return User::create($data);
+    }
+
+    public function find($id)
+    {
+        return User::find($id);
+    }
+
+    public function setRole($userId, $roleId)
+    {
+        $roleId = is_array($roleId) ?: [$roleId];
+        return $this->find($userId)->roles()->sync($roleId);
+    }
 }

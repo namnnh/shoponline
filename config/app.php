@@ -184,6 +184,7 @@ return [
         Zizaco\Entrust\EntrustServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class,
         anlutro\LaravelSettings\ServiceProvider::class,
+        Proengsoft\JsValidation\JsValidationServiceProvider::class,
     ],
 
     /*
@@ -239,6 +240,7 @@ return [
         'Form' => Collective\Html\FormFacade::class,
         'HTML' => Collective\Html\HtmlFacade::class,
         'Settings' => anlutro\LaravelSettings\Facade::class,
+        'JsValidator' => Proengsoft\JsValidation\Facades\JsValidatorFacade::class,
 
     ],
 
