@@ -40,4 +40,20 @@ interface UserRepository
      * @return mixed
      */
      public function getUserSocialLogins($userId);
+
+      /**
+     * Update user social networks.
+     * @param $userId
+     * @param array $data
+     * @return mixed
+     */
+     public function updateSocialNetworks($userId, array $data);
+
+     /**
+     * Delete user with provided id.
+     *
+     * @param $id
+     * @return mixed
+     */
+     public function delete($id);
 }

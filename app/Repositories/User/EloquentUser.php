@@ -58,4 +58,17 @@ class EloquentUser implements UserRepository
             ->where('user_id', $userId)
             ->get();
     }
+
+    public function updateSocialNetworks($userId, array $data)
+    {
+        return $this->find($userId)->socialNetworks()->updateOrCreate([], $data);
+    }
+
+    public function delete($id)
+    {
+        $user = $this->find($id);
+        // $this->avatarManager->deleteAvatarIfUploaded($user);
+
+        return $user->delete();
+    }
 }

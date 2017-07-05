@@ -11,6 +11,7 @@ use App\Repositories\User\UserRepository;
 use App\Repositories\Country\CountryRepository;
 use App\Repositories\Role\RoleRepository;
 use App\User;
+use Auth;
 
 
 class UsersController extends Controller
@@ -50,9 +51,23 @@ class UsersController extends Controller
         }
 		$user = $this->users->create($data);
 		$this->users->setRole($user->id, $request->get('role'));
+		$this->users->updateSocialNetworks($user->id, []);
 		return redirect()->route('admin.user.list')
             ->withSuccess(trans('app.user_created'));
 	}
+
+	public function delete(User $user)
+    {
+        if ($user->id == Auth::id()) {
+            return redirect()->route('admin.user.list')
+                ->withErrors(trans('app.you_cannot_delete_yourself'));
+        }
+
+        $this->users->delete($user->id);
+
+        return redirect()->route('admin.user.list')
+            ->withSuccess(trans('app.user_deleted'));
+    }
 
 	public function edit(User $user,CountryRepository $countryRepository, RoleRepository $roleRepository)
 	{
@@ -71,6 +86,11 @@ class UsersController extends Controller
 	{
 		return redirect()->back()
             ->withSuccess(trans('app.user_updated'));
+	}
+
+	public function updateAvatar(User $user,Request $request)
+	{
+		$this->validate($request, ['avatar' => 'image']);
 	}
 	/**
 	* Private function

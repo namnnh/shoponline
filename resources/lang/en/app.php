@@ -24,6 +24,8 @@ return [
     'Active' => 'Active',
     'Banned' => 'Banned',
     'Unconfirmed' => 'Unconfirmed',
+    'cancel' => 'Cancel',
+    'save' => 'Save',
 
     //User
     'username' => 'Username',
@@ -64,6 +66,11 @@ return [
     'leave_blank_if_you_dont_want_to_change' => 'Leave blank if you don\'t want to change',
     'change_photo' => 'Change photo',
     'avatar' => 'Avatar',
+    'you_cannot_delete_yourself' => 'You cannot delete yourself',
+    'user_deleted' => 'User deleted successfully.',
+    'no_photo' => 'No Photo',
+    'upload_photo' => 'Upload photo',
+    'gravatar' => 'Gravatar',
 
 
 

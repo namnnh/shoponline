@@ -47,6 +47,11 @@ Route::group(['middleware' => 'auth'], function () {
         'uses' => 'Admin\UsersController@store'
     ]);
 
+    Route::delete('user/{user}/delete', [
+        'as' => 'admin.user.delete',
+        'uses' => 'Admin\UsersController@delete'
+    ]);
+
     Route::get('/admin/user/{user}/edit', [
         'as' => 'admin.user.edit',
         'uses' => 'Admin\UsersController@edit'

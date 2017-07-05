@@ -96,11 +96,11 @@
 
 @section('styles')
     {!! HTML::style('assets/admin/css/bootstrap-datetimepicker.min.css') !!}
-    {!! HTML::style('assets/plugins/croppie/croppie.css') !!}
+    {!! HTML::style('assets/admin/plugins/croppie/croppie.css') !!}
 @stop
 
 @section('scripts')
-    {!! HTML::script('assets/plugins/croppie/croppie.js') !!}
+    {!! HTML::script('assets/admin/plugins/croppie/croppie.js') !!}
     {!! HTML::script('assets/admin/js/moment.min.js') !!}
     {!! HTML::script('assets/admin/js/bootstrap-datetimepicker.min.js') !!}
     {!! HTML::script('assets/js/as/btn.js') !!}

@@ -80,11 +80,11 @@
 	                               title="@lang('app.view_user')" data-toggle="tooltip" data-placement="top">
 	                                <i class="glyphicon glyphicon-eye-open"></i>
 	                            </a>
-	                            <a href="#" class="btn btn-primary btn-circle edit" title="@lang('app.edit_user')"
+	                            <a href="{{route('admin.user.edit', $user->id)}}" class="btn btn-primary btn-circle edit" title="@lang('app.edit_user')"
 	                                    data-toggle="tooltip" data-placement="top">
 	                                <i class="glyphicon glyphicon-edit"></i>
 	                            </a>
-	                            <a href="#" class="btn btn-danger btn-circle" title="@lang('app.delete_user')"
+	                            <a href="{{route('admin.user.delete', $user->id)}}" class="btn btn-danger btn-circle" title="@lang('app.delete_user')"
 	                                    data-toggle="tooltip"
 	                                    data-placement="top"
 	                                    data-method="DELETE"

@@ -8,7 +8,7 @@
         </div>
         <div id="avatar"></div>
         <div>
-            <img class="avatar avatar-preview img-circle" src="{{ $edit ? $user->present()->avatar : url('assets/img/profile.png') }}">
+            <img class="avatar avatar-preview img-circle" src="{{ $edit ? $user->present()->avatar : url('assets/admin/img/profile.png') }}">
             <div id="change-picture" class="btn btn-default btn-block" data-toggle="modal" data-target="#choose-modal">
                 <i class="fa fa-camera"></i>
                 @lang('app.change_photo')
@@ -36,7 +36,7 @@
                 <div class="row">
                     <div class="col-md-4 avatar-source" id="no-photo"
                          data-url="{{ $updateUrl }}">
-                        <img src="{{ url('assets/img/profile.png') }}" class="img-circle">
+                        <img src="{{ url('assets/admin/img/profile.png') }}" class="img-circle">
                         <p>@lang('app.no_photo')</p>
                     </div>
                     <div class="col-md-4 avatar-source">
