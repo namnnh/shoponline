@@ -185,6 +185,7 @@ return [
         Collective\Html\HtmlServiceProvider::class,
         anlutro\LaravelSettings\ServiceProvider::class,
         Proengsoft\JsValidation\JsValidationServiceProvider::class,
+        Intervention\Image\ImageServiceProvider::class,
     ],
 
     /*
@@ -241,6 +242,7 @@ return [
         'HTML' => Collective\Html\HtmlFacade::class,
         'Settings' => anlutro\LaravelSettings\Facade::class,
         'JsValidator' => Proengsoft\JsValidation\Facades\JsValidatorFacade::class,
+        'Image' => Intervention\Image\Facades\Image::class,
 
     ],
 

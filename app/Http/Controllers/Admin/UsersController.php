@@ -10,6 +10,7 @@ use App\Support\Enum\UserStatus;
 use App\Repositories\User\UserRepository;
 use App\Repositories\Country\CountryRepository;
 use App\Repositories\Role\RoleRepository;
+use App\Services\Upload\UserAvatarManager;
 use App\User;
 use Auth;
 
