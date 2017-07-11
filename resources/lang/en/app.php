@@ -71,6 +71,13 @@ return [
     'no_photo' => 'No Photo',
     'upload_photo' => 'Upload photo',
     'gravatar' => 'Gravatar',
+    'avatar_changed' =>  'Avatar changed successfully.',
+    'avatar_not_changed' => 'Avatar image cannot be updated. Please try again.',
+    'socials_updated' => 'Social networks updated successfully.',
+    'update_social_networks' => 'Update Social Networks',
+    'new_password' => 'New Password',
+    'confirm_new_password' => 'Confirm New Password',
+    'login_updated' => 'Login details updated successfully.',
 
 
 

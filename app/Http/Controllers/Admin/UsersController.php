@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Requests\Admin\User\CreateUserRequest;
 use App\Http\Requests\Admin\User\UpdateDetailsRequest;
+use App\Http\Requests\Admin\User\UpdateLoginDetailsRequest;
 use App\Http\Controllers\Controller;
 use App\Support\Enum\UserStatus;
 use App\Repositories\User\UserRepository;
@@ -85,14 +86,46 @@ class UsersController extends Controller
 
 	public function updateDetails(User $user, UpdateDetailsRequest $request)
 	{
+		$this->users->update($user->id, $request->all());
+		$this->users->setRole($user->id, $request->get('role'));
 		return redirect()->back()
             ->withSuccess(trans('app.user_updated'));
 	}
 
-	public function updateAvatar(User $user,Request $request)
+	public function updateAvatar(User $user,Request $request,UserAvatarManager $avatarManager)
 	{
 		$this->validate($request, ['avatar' => 'image']);
+		if ($name = $avatarManager->uploadAndCropAvatar($user)) {
+			 $this->users->update($user->id, ['avatar' => $name]);
+			 return redirect()->route('admin.user.edit', $user->id)
+                ->withSuccess(trans('app.avatar_changed'));
+		}
+		return redirect()->route('admin.user.edit', $user->id)
+            ->withErrors(trans('app.avatar_not_changed'));
 	}
+
+	public function updateSocialNetworks(User $user, Request $request)
+    {
+        $this->users->updateSocialNetworks($user->id, $request->get('socials'));
+
+        return redirect()->route('admin.user.edit', $user->id)
+            ->withSuccess(trans('app.socials_updated'));
+    }
+
+    public function updateLoginDetails(User $user, UpdateLoginDetailsRequest $request)
+    {
+        $data = $request->all();
+
+        if (trim($data['password']) == '') {
+            unset($data['password']);
+            unset($data['password_confirmation']);
+        }
+
+        $this->users->update($user->id, $data);
+
+        return redirect()->route('admin.user.edit', $user->id)
+            ->withSuccess(trans('app.login_updated'));
+    }
 	/**
 	* Private function
 	*/

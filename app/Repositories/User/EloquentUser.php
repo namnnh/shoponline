@@ -71,4 +71,13 @@ class EloquentUser implements UserRepository
 
         return $user->delete();
     }
+
+    public function update($id, array $data)
+    {
+        if (! array_get($data, 'country_id')) {
+            $data['country_id'] = null;
+        }
+
+        return $this->find($id)->update($data);
+    }
 }

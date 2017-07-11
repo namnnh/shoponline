@@ -56,4 +56,13 @@ interface UserRepository
      * @return mixed
      */
      public function delete($id);
+
+     /**
+     * Update user specified by it's id.
+     *
+     * @param $id
+     * @param array $data
+     * @return mixed
+     */
+    public function update($id, array $data);
 }

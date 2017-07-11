@@ -139,4 +139,17 @@ class UserAvatarManager
             ->resize(self::AVATAR_WIDTH, self::AVATAR_HEIGHT)
             ->save();
     }
+
+    /**
+     * Check if user has uploaded avatar photo.
+     * If he is using some external url for avatar, then
+     * it is assumed that avatar is not uploaded manually.
+     *
+     * @param User $user
+     * @return bool
+     */
+    private function userHasUploadedAvatar(User $user)
+    {
+        return $user->avatar && ! str_contains($user->avatar, ['http', 'gravatar']);
+    }
 }
