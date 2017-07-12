@@ -39,7 +39,7 @@
 	                        <span class="glyphicon glyphicon-search"></span>
 	                    </button>
 	                    @if (Input::has('search') && Input::get('search') != '')
-	                        <a href="{{ route('user.list') }}" class="btn btn-danger" type="button" >
+	                        <a href="{{ route('admin.user.list') }}" class="btn btn-danger" type="button" >
 	                            <span class="glyphicon glyphicon-remove"></span>
 	                        </a>
 	                    @endif
@@ -76,7 +76,7 @@
 	                                    <i class="fa fa-list"></i>
 	                                </a>
 	                            @endif
-	                            <a href="#" class="btn btn-success btn-circle"
+	                            <a href="{{route('admin.user.show', $user->id)}}" class="btn btn-success btn-circle"
 	                               title="@lang('app.view_user')" data-toggle="tooltip" data-placement="top">
 	                                <i class="glyphicon glyphicon-eye-open"></i>
 	                            </a>
@@ -106,4 +106,12 @@
 
 	    {!! $users->render() !!}
 	</div>
+@stop
+
+@section('scripts')
+    <script>
+        $("#status").change(function () {
+            $("#users-form").submit();
+        });
+    </script>
 @stop

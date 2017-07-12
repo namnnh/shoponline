@@ -78,6 +78,16 @@ return [
     'new_password' => 'New Password',
     'confirm_new_password' => 'Confirm New Password',
     'login_updated' => 'Login details updated successfully.',
+    'no_records_found' => 'No Records Found',
+    'my_profile' => 'My Profile',
+    'edit_profile_details' => 'edit profile details',
+    'latest_activity' => 'Latest Activity',
+    'app.date' => 'Date',
+    'contact_informations' => 'Contact Informations',
+    'birth' => 'Birth',
+    'last_logged_in' => 'Last Logged In',
+    'view_all' => 'View all',
+
 
 
 

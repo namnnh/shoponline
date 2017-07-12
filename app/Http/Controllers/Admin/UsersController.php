@@ -11,7 +11,9 @@ use App\Support\Enum\UserStatus;
 use App\Repositories\User\UserRepository;
 use App\Repositories\Country\CountryRepository;
 use App\Repositories\Role\RoleRepository;
+use App\Repositories\Activity\ActivityRepository;
 use App\Services\Upload\UserAvatarManager;
+use Illuminate\Support\Facades\Input;
 use App\User;
 use Auth;
 
@@ -32,8 +34,17 @@ class UsersController extends Controller
     {
         $perPage = 20;
     	$statuses = ['' => trans('app.all')] + UserStatus::lists();
-    	$users = $this->users->paginate($perPage);
+    	$users = $this->users->paginate($perPage,Input::get('search'), Input::get('status'));
     	return view('admin.user.list',compact('statuses','users'));
+    }
+
+    public function view(User $user, ActivityRepository $activities)
+    {
+        $socialNetworks = $user->socialNetworks;
+
+        $userActivities = $activities->getLatestActivitiesForUser($user->id, 10);
+
+        return view('admin.user.view', compact('user', 'socialNetworks', 'userActivities'));
     }
 
 	public function create(CountryRepository $countryRepository, RoleRepository $roleRepository)
