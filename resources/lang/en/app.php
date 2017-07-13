@@ -87,6 +87,17 @@ return [
     'birth' => 'Birth',
     'last_logged_in' => 'Last Logged In',
     'view_all' => 'View all',
+    'ip_address' => 'IP Address',
+    'user_agent' => 'User Agent',
+    'last_activity' => 'Last Activity',
+    'active_sessions_sm' => 'active sessions',
+    'sessions' => 'Sessions',
+    'user_sessions' => 'User Sessions',
+    'please_confirm' => 'Please Confirm',
+    'are_you_sure_invalidate_session' => 'Are you sure that you want to invalidate this session?',
+    'yes_proceed' => 'Yes, proceed!',
+    'invalidate_session' => 'Invalidate Session',
+
 
 
 

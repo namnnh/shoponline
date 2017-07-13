@@ -11,6 +11,8 @@ use App\Repositories\Role\RoleRepository;
 use App\Repositories\Role\EloquentRole;
 use App\Repositories\Activity\ActivityRepository;
 use App\Repositories\Activity\EloquentActivity;
+use App\Repositories\Session\SessionRepository;
+use App\Repositories\Session\DbSession;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -33,6 +35,7 @@ class AppServiceProvider extends ServiceProvider
     {
         $this->app->singleton(UserRepository::class, EloquentUser::class);
         $this->app->singleton(ActivityRepository::class, EloquentActivity::class);
+        $this->app->singleton(SessionRepository::class, DbSession::class);
         $this->app->singleton(CountryRepository::class, EloquentCountry::class);     
         $this->app->singleton(RoleRepository::class, EloquentRole::class);        
            

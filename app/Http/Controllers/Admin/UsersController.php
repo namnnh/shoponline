@@ -12,6 +12,7 @@ use App\Repositories\User\UserRepository;
 use App\Repositories\Country\CountryRepository;
 use App\Repositories\Role\RoleRepository;
 use App\Repositories\Activity\ActivityRepository;
+use App\Repositories\Session\SessionRepository;
 use App\Services\Upload\UserAvatarManager;
 use Illuminate\Support\Facades\Input;
 use App\User;
@@ -136,6 +137,18 @@ class UsersController extends Controller
 
         return redirect()->route('admin.user.edit', $user->id)
             ->withSuccess(trans('app.login_updated'));
+    }
+
+    public function sessions(User $user, SessionRepository $sessionRepository)
+    {
+        $adminView = true;
+        $sessions = $sessionRepository->getUserSessions($user->id);
+
+        return view('admin.user.sessions', compact('sessions', 'user', 'adminView'));
+    }
+
+    public function invalidateSession(){
+    	dd(123);
     }
 	/**
 	* Private function

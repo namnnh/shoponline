@@ -29,6 +29,15 @@ Route::group(['middleware' => 'auth'], function () {
         'uses' => 'DashboardController@index'
     ]);
 
+    /**
+     * User Profile
+     */
+
+    Route::get('/admin/profile/sessions', [
+        'as' => 'admin.profile.sessions',
+        'uses' => 'ProfileController@sessions'
+    ]);
+
      /**
      * User Management
      */
@@ -83,6 +92,15 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/admin/user/{user}/update/social-networks', [
         'as' => 'admin.user.update.socials',
         'uses' => 'Admin\UsersController@updateSocialNetworks'
+    ]);
+
+    Route::get('/admin/user/{user}/sessions', [
+        'as' => 'admin.user.sessions',
+        'uses' => 'Admin\UsersController@sessions'
+    ]);
+    Route::delete('/admin/user/{user}/sessions/{session}/invalidate', [
+        'as' => 'admin.user.sessions.invalidate',
+        'uses' => 'Admin\UsersController@invalidateSession'
     ]);
 });
 

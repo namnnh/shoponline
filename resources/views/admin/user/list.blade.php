@@ -71,7 +71,7 @@
 	                        </td>
 	                        <td class="text-center">
 	                            @if (config('session.driver') == 'database')
-	                                <a href="{{ route('user.sessions', $user->id) }}" class="btn btn-info btn-circle"
+	                                <a href="{{ route('admin.user.sessions', $user->id) }}" class="btn btn-info btn-circle"
 	                                   title="@lang('app.user_sessions')" data-toggle="tooltip" data-placement="top">
 	                                    <i class="fa fa-list"></i>
 	                                </a>

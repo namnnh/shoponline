@@ -58,7 +58,7 @@
                             </li>
                             @if (config('session.driver') == 'database')
                                 <li>
-                                    <a href="{{ route('profile.sessions') }}">
+                                    <a href="{{ route('admin.profile.sessions') }}">
                                         <i class="fa fa-list"></i>
                                         @lang('app.active_sessions')
                                     </a>
