@@ -147,8 +147,11 @@ class UsersController extends Controller
         return view('admin.user.sessions', compact('sessions', 'user', 'adminView'));
     }
 
-    public function invalidateSession(){
-    	dd(123);
+    public function invalidateSession(User $user, $sessionId, SessionRepository $sessionRepository){
+    	$sessionRepository->invalidateUserSession($user->id, $sessionId);
+
+        return redirect()->route('admin.user.sessions', $user->id)
+            ->withSuccess(trans('app.session_invalidated'));
     }
 	/**
 	* Private function

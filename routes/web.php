@@ -102,6 +102,15 @@ Route::group(['middleware' => 'auth'], function () {
         'as' => 'admin.user.sessions.invalidate',
         'uses' => 'Admin\UsersController@invalidateSession'
     ]);
+
+     /**
+     * Activity Log
+     */
+
+    Route::get('/admin/activity', [
+        'as' => 'admin.activity.index',
+        'uses' => 'Admin\ActivityController@index'
+    ]);
 });
 
 

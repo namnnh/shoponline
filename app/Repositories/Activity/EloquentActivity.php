@@ -13,4 +13,11 @@ class EloquentActivity implements ActivityRepository
             ->limit($activitiesCount)
             ->get();
     }
+
+    public function paginateActivitiesForUser($userId, $perPage = 20, $search = null)
+    {
+        $query = Activity::where('user_id', $userId);
+
+        return $this->paginateAndFilterResults($perPage, $search, $query);
+    }
 }

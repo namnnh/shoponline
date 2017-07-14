@@ -16,4 +16,14 @@ interface ActivityRepository
      */
     public function getLatestActivitiesForUser($userId, $activitiesCount = 10);
 
+    /**
+     * Paginate activities for user.
+     *
+     * @param $userId
+     * @param int $perPage
+     * @param null $search
+     * @return mixed
+     */
+    public function paginateActivitiesForUser($userId, $perPage = 20, $search = null);
+
 }
