@@ -7,6 +7,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use App\Support\Authorization\AuthorizationUserTrait;
 use Laracasts\Presenter\PresentableTrait;
 use App\Presenters\UserPresenter;
+use App\Support\Enum\UserStatus;
 
 class User extends Authenticatable
 {
@@ -40,6 +41,21 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function isUnconfirmed()
+    {
+        return $this->status == UserStatus::UNCONFIRMED;
+    }
+
+    public function isActive()
+    {
+        return $this->status == UserStatus::ACTIVE;
+    }
+
+    public function isBanned()
+    {
+        return $this->status == UserStatus::BANNED;
+    }
 
     public function socialNetworks()
     {

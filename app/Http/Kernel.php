@@ -51,6 +51,9 @@ class Kernel extends HttpKernel
      */
     protected $routeMiddleware = [
         'auth' => \App\Http\Middleware\Authenticate::class,
+        'registration' => \App\Http\Middleware\Registration::class,
+        'permission' => \Zizaco\Entrust\Middleware\EntrustPermission::class,
+        'session.database' => \App\Http\Middleware\DatabaseSession::class,
         'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
         'bindings' => \Illuminate\Routing\Middleware\SubstituteBindings::class,
         'can' => \Illuminate\Auth\Middleware\Authorize::class,

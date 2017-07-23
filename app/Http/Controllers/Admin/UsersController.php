@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
+use App\Events\User\Deleted;
 use App\Http\Requests\Admin\User\CreateUserRequest;
 use App\Http\Requests\Admin\User\UpdateDetailsRequest;
 use App\Http\Requests\Admin\User\UpdateLoginDetailsRequest;
@@ -28,7 +29,9 @@ class UsersController extends Controller
 
 	public function __construct(UserRepository $users)
 	{
-		  $this->users = $users;
+		$this->middleware('session.database', ['only' => ['sessions', 'invalidateSession']]);
+        $this->middleware('permission:users.manage');
+		$this->users = $users;
 	}
 
     public function index()
@@ -78,6 +81,7 @@ class UsersController extends Controller
         }
 
         $this->users->delete($user->id);
+		event(new Deleted($user));
 
         return redirect()->route('admin.user.list')
             ->withSuccess(trans('app.user_deleted'));

@@ -9,68 +9,76 @@
                     <div class="name"><strong>{{ Auth::user()->present()->nameOrEmail }}</strong></div>
                 </div>
             </li>
-            <li class="{{ Request::is('/') ? 'active open' : ''  }}">
+            <li class="{{ Request::is('admin') ? 'active open' : ''  }}">
                 <a href="{{ route('dashboard') }}" class="{{ Request::is('/') ? 'active' : ''  }}">
                     <i class="fa fa-dashboard fa-fw"></i> @lang('app.dashboard')
                 </a>
             </li>
-            <li class="{{ Request::is('user*') ? 'active open' : ''  }}">
+             @permission('users.manage')
+            <li class="{{ Request::is('admin/user*') ? 'active open' : ''  }}">
                 <a href="{{route('admin.user.list')}}" class="{{ Request::is('user*') ? 'active' : ''  }}">
                     <i class="fa fa-users fa-fw"></i> @lang('app.users')
                 </a>
             </li>
+            @endpermission
 
-            <li class="{{ Request::is('activity*') ? 'active open' : ''  }}">
-                <a href="#" class="{{ Request::is('activity*') ? 'active' : ''  }}">
+            @permission('users.activity')
+            <li class="{{ Request::is('admin/activity*') ? 'active open' : ''  }}">
+                <a href="{{route('admin.activity.index')}}" class="{{ Request::is('activity*') ? 'active' : ''  }}">
                     <i class="fa fa-list-alt fa-fw"></i> @lang('app.activity_log')
                 </a>
             </li>
+            @endpermission
 
-            <li class="{{ Request::is('role*') || Request::is('permission*') ? 'active open' : ''  }}">
+            @permission(['roles.manage', 'permissions.manage'])
+            <li class="{{ Request::is('admin/role*') || Request::is('admin/permission*') ? 'active' : ''  }}">
                 <a href="#">
                     <i class="fa fa-user fa-fw"></i>
                     @lang('app.roles_and_permissions')
                     <span class="fa arrow"></span>
                 </a>
                 <ul class="nav nav-second-level collapse">
-                        <li>
-                            <a href="#" class="{{ Request::is('role*') ? 'active' : ''  }}">
+                        <li class="{{ Request::is('admin/role*') ? 'active open' : ''  }}">
+                            <a href="{{route('admin.role.index')}}" class="{{ Request::is('role*') ? 'active' : ''  }}">
                                 @lang('app.roles')
                             </a>
                         </li>
-                        <li>
-                            <a href="#"
+                        <li class="{{ Request::is('admin/permission*') ? 'active open' : ''  }}">
+                            <a href="{{route('admin.permission.index')}}"
                                class="{{ Request::is('permission*') ? 'active' : ''  }}">@lang('app.permissions')</a>
                         </li>
                 </ul>
             </li>
-
-            <li class="{{ Request::is('settings*') ? 'active open' : ''  }}">
+            @endpermission
+            
+            @permission(['settings.general', 'settings.auth', 'settings.notifications'])
+            <li class="{{ Request::is('admin/settings*') ? 'active' : ''  }}">
                 <a href="#">
                     <i class="fa fa-gear fa-fw"></i> @lang('app.settings')
                     <span class="fa arrow"></span>
                 </a>
                 <ul class="nav nav-second-level collapse">
-                        <li>
-                            <a href="#"
+                        <li class="{{ Request::is('admin/settings') ? 'active open' : ''  }}">
+                            <a href="{{route('admin.settings.general')}}"
                                class="{{ Request::is('settings') ? 'active' : ''  }}">
                                 @lang('app.general')
                             </a>
                         </li>
-                        <li>
-                            <a href="#"
+                        <li class="{{ Request::is('admin/settings/auth') ? 'active open' : ''  }}">
+                            <a href="{{route('admin.settings.auth')}}"
                                class="{{ Request::is('settings/auth*') ? 'active' : ''  }}">
                                 @lang('app.auth_and_registration')
                             </a>
                         </li>
-                        <li>
-                            <a href="#"
+                        <li class="{{ Request::is('admin/settings/notifications') ? 'active open' : ''  }}">
+                            <a href="{{route('admin.settings.notifications')}}"
                                class="{{ Request::is('settings/notifications*') ? 'active' : ''  }}">
                                 @lang('app.notifications')
                             </a>
                         </li>
                 </ul>
             </li>
+            @endpermission
         </ul>
     </div>
     <!-- /.sidebar-collapse -->

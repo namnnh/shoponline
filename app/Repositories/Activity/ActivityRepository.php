@@ -7,6 +7,18 @@ use Illuminate\Contracts\Pagination\Paginator;
 
 interface ActivityRepository
 {
+     /**
+     * Log user activity.
+     *
+     * @param $data array Array with following fields:
+     *      description (string) - Description of user activity.
+     *      user_id (int) - User unique identifier.
+     *      ip_address (string) - Ip address from which user is accessing the website.
+     *      user_agent (string) - User's browser info.
+     * @return mixed
+     */
+    public function log($data);
+    
 	/**
      * Get specified number of latest user activity logs.
      *
@@ -25,5 +37,14 @@ interface ActivityRepository
      * @return mixed
      */
     public function paginateActivitiesForUser($userId, $perPage = 20, $search = null);
+
+    /**
+     * Paginate all activity records.
+     *
+     * @param int $perPage
+     * @param null $search
+     * @return Paginator
+     */
+    public function paginateActivities($perPage = 20, $search = null);
 
 }

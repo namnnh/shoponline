@@ -181,6 +181,7 @@ return [
          * Third-Party Service Providers
          */
         Webpatser\Countries\CountriesServiceProvider::class,
+        Anhskohbo\NoCaptcha\NoCaptchaServiceProvider::class,
         Zizaco\Entrust\EntrustServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class,
         anlutro\LaravelSettings\ServiceProvider::class,

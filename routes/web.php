@@ -23,6 +23,29 @@ Route::get('/admin/login', 'Auth\AuthController@getLogin');
 
 Route::post('/admin/login', 'Auth\AuthController@postLogin');
 
+// Alow forgot password routes only if it's enabled
+if (settings('forgot_password')) {
+    Route::get('/admin/password/remind', 'Auth\PasswordController@forgotPassword');
+    Route::post('/admin/password/remind', 'Auth\PasswordController@sendPasswordReminder');
+    Route::get('/admin/password/reset/{token}', 'Auth\PasswordController@getReset');
+    Route::post('/admin/password/reset', 'Auth\PasswordController@postReset');
+}
+
+// Allow registration routes only if registration is enabled.
+if (settings('reg_enabled')) {
+    Route::get('/admin/register', 'Auth\AuthController@getRegister');
+    Route::post('/admin/register', 'Auth\AuthController@postRegister');
+    Route::get('/admin/register/confirmation/{token}', [
+        'as' => 'admin.register.confirm-email',
+        'uses' => 'Auth\AuthController@confirmEmail'
+    ]);
+}
+
+Route::get('logout', [
+    'as' => 'auth.logout',
+    'uses' => 'Auth\AuthController@getLogout'
+]);
+
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/admin', [
         'as' => 'dashboard',
@@ -103,6 +126,55 @@ Route::group(['middleware' => 'auth'], function () {
         'uses' => 'Admin\UsersController@invalidateSession'
     ]);
 
+    /**
+     * User Profile
+     */
+
+    Route::get('admin/profile', [
+        'as' => 'admin.profile',
+        'uses' => 'Admin\ProfileController@index'
+    ]);
+
+    Route::get('admin/profile/activity', [
+        'as' => 'admin.profile.activity',
+        'uses' => 'Admin\ProfileController@activity'
+    ]);
+
+    Route::put('admin/profile/details/update', [
+        'as' => 'admin.profile.update.details',
+        'uses' => 'Admin\ProfileController@updateDetails'
+    ]);
+
+    Route::post('admin/profile/avatar/update', [
+        'as' => 'admin.profile.update.avatar',
+        'uses' => 'Admin\ProfileController@updateAvatar'
+    ]);
+
+    Route::post('admin/profile/avatar/update/external', [
+        'as' => 'admin.profile.update.avatar-external',
+        'uses' => 'Admin\ProfileController@updateAvatarExternal'
+    ]);
+
+    Route::put('admin/profile/login-details/update', [
+        'as' => 'admin.profile.update.login-details',
+        'uses' => 'Admin\ProfileController@updateLoginDetails'
+    ]);
+
+    Route::put('admin/profile/social-networks/update', [
+        'as' => 'admin.profile.update.social-networks',
+        'uses' => 'Admin\ProfileController@updateSocialNetworks'
+    ]);
+
+    Route::get('admin/profile/sessions', [
+        'as' => 'admin.profile.sessions',
+        'uses' => 'Admin\ProfileController@sessions'
+    ]);
+
+    Route::delete('admin/profile/sessions/{session}/invalidate', [
+        'as' => 'admin.profile.sessions.invalidate',
+        'uses' => 'Admin\ProfileController@invalidateSession'
+    ]);
+
      /**
      * Activity Log
      */
@@ -110,6 +182,109 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/admin/activity', [
         'as' => 'admin.activity.index',
         'uses' => 'Admin\ActivityController@index'
+    ]);
+
+    Route::get('/admin/activity/user/{user}/log', [
+        'as' => 'admin.activity.user',
+        'uses' => 'Admin\ActivityController@userActivity'
+    ]);
+
+     /**
+     * Roles & Permissions
+     */
+    Route::get('/admin/role', [
+        'as' => 'admin.role.index',
+        'uses' => 'Admin\RolesController@index'
+    ]);
+    Route::get('/admin/role/create', [
+        'as' => 'admin.role.create',
+        'uses' => 'Admin\RolesController@create'
+    ]);
+
+    Route::post('/admin/role/store', [
+        'as' => 'admin.role.store',
+        'uses' => 'Admin\RolesController@store'
+    ]);
+
+    Route::get('/admin/role/{role}/edit', [
+        'as' => 'admin.role.edit',
+        'uses' => 'Admin\RolesController@edit'
+    ]);
+
+    Route::put('/admin/role/{role}/update', [
+        'as' => 'admin.role.update',
+        'uses' => 'Admin\RolesController@update'
+    ]);
+
+    Route::delete('/admin/role/{role}/delete', [
+        'as' => 'admin.role.delete',
+        'uses' => 'Admin\RolesController@delete'
+    ]);
+
+    Route::post('admin/permission/save', [
+        'as' => 'admin.permission.save',
+        'uses' => 'Admin\PermissionsController@saveRolePermissions'
+    ]);
+
+    Route::resource('admin/permission', 'Admin\PermissionsController',['names' => [
+        'index' => 'admin.permission.index',
+        'create' => 'admin.permission.create',
+        'edit' => 'admin.permission.edit',
+        'update' => 'admin.permission.update',
+        'destroy' => 'admin.permission.destroy',
+        'store' => 'admin.permission.store'
+    ]]);
+
+    /**
+     * Settings
+     */
+
+    Route::get('admin/settings', [
+        'as' => 'admin.settings.general',
+        'uses' => 'Admin\SettingsController@general',
+        'middleware' => 'permission:settings.general'
+    ]);
+
+    Route::post('admin/settings/general', [
+        'as' => 'admin.settings.general.update',
+        'uses' => 'Admin\SettingsController@update',
+        'middleware' => 'permission:settings.general'
+    ]);
+
+    Route::get('admin/settings/auth', [
+        'as' => 'admin.settings.auth',
+        'uses' => 'Admin\SettingsController@auth',
+        'middleware' => 'permission:settings.auth'
+    ]);
+
+    Route::post('admin/settings/auth', [
+        'as' => 'admin.settings.auth.update',
+        'uses' => 'Admin\SettingsController@update',
+        'middleware' => 'permission:settings.auth'
+    ]);
+
+    Route::post('admin/settings/auth/registration/captcha/enable', [
+        'as' => 'admin.settings.registration.captcha.enable',
+        'uses' => 'Admin\SettingsController@enableCaptcha',
+        'middleware' => 'permission:settings.auth'
+    ]);
+
+    Route::post('admin/settings/auth/registration/captcha/disable', [
+        'as' => 'admin.settings.registration.captcha.disable',
+        'uses' => 'Admin\SettingsController@disableCaptcha',
+        'middleware' => 'permission:settings.auth'
+    ]);
+
+    Route::get('admin/settings/notifications', [
+        'as' => 'admin.settings.notifications',
+        'uses' => 'Admin\SettingsController@notifications',
+        'middleware' => 'permission:settings.notifications'
+    ]);
+
+    Route::post('admin/settings/notifications', [
+        'as' => 'admin.settings.notifications.update',
+        'uses' => 'Admin\SettingsController@update',
+        'middleware' => 'permission:settings.notifications'
     ]);
 });
 

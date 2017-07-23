@@ -65,4 +65,34 @@ interface UserRepository
      * @return mixed
      */
     public function update($id, array $data);
+
+    /**
+     * Change role for all users who has role $fromRoleId to $toRoleId.
+     *
+     * @param $fromRoleId Id of current role.
+     * @param $toRoleId Id of new role.
+     * @return mixed
+     */
+    public function switchRolesForUsers($fromRoleId, $toRoleId);
+
+     /**
+     * Find user by email.
+     *
+     * @param $email
+     * @return null|User
+     */
+    public function findByEmail($email);
+
+    /**
+    * Find user by Token
+    */
+    public function findByConfirmationToken($token);
+
+    /**
+     * Get all users with provided role.
+     *
+     * @param $roleName
+     * @return mixed
+     */
+    public function getUsersWithRole($roleName);
 }

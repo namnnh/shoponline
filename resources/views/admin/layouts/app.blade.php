@@ -51,7 +51,7 @@
                         </a>
                         <ul class="dropdown-menu">
                             <li>
-                                <a href="#">
+                                <a href="{{route('admin.profile')}}">
                                     <i class="fa fa-user"></i>
                                     @lang('app.my_profile')
                                 </a>
@@ -65,7 +65,7 @@
                                 </li>
                             @endif
                             <li>
-                                <a href="#">
+                                <a href="{{route('auth.logout')}}">
                                     <i class="fa fa-sign-out"></i>
                                     @lang('app.logout')
                                 </a>

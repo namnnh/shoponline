@@ -44,7 +44,7 @@
                         <td>{{ $session->user_agent }}</td>
                         <td>{{ \Carbon\Carbon::createFromTimestamp($session->last_activity)->format('Y-m-d H:i:s') }}</td>
                         <td class="text-center">
-                            <a href="{{ isset($profile) ? route('profile.sessions.invalidate', $session->id) : route('admin.user.sessions.invalidate', [$user->id, $session->id]) }}"
+                            <a href="{{ isset($profile) ? route('admin.profile.sessions.invalidate', $session->id) : route('admin.user.sessions.invalidate', [$user->id, $session->id]) }}"
                                 class="btn btn-danger btn-circle" title="@lang('app.invalidate_session')"
                                 data-toggle="tooltip"
                                 data-placement="top"

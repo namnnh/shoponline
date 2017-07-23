@@ -28,7 +28,7 @@
                 <i class="fa fa-lock"></i>
                 <input type="password" name="password" id="password" class="form-control" placeholder="@lang('app.password')">
                 @if (settings('forgot_password'))
-                    <a href="<?= url('password/remind') ?>" class="forgot">@lang('app.i_forgot_my_password')</a>
+                    <a href="<?= url('/admin/password/remind') ?>" class="forgot">@lang('app.i_forgot_my_password')</a>
                 @endif
             </div>
             <div class="checkbox">
@@ -39,7 +39,7 @@
                 @endif
 
                 @if (settings('reg_enabled'))
-                    <a href="<?= url("register") ?>" style="float: right;">@lang('app.dont_have_an_account')</a>
+                    <a href="<?= url("/admin/register") ?>" style="float: right;">@lang('app.dont_have_an_account')</a>
                 @endif
             </div>
             <div class="form-group">

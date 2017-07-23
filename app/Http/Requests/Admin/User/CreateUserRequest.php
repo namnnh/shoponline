@@ -2,7 +2,6 @@
 namespace App\Http\Requests\Admin\User;
 
 use App\Http\Requests\Request;
-use App\User;
 
 class CreateUserRequest extends Request
 {

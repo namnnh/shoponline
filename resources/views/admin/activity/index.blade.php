@@ -13,7 +13,7 @@
                 <ol class="breadcrumb">
                     <li><a href="{{ route('dashboard') }}">@lang('app.home')</a></li>
                     @if (isset($user) && isset($adminView))
-                        <li><a href="{{ route('activity.index') }}">@lang('app.activity_log')</a></li>
+                        <li><a href="{{ route('admin.activity.index') }}">@lang('app.activity_log')</a></li>
                         <li class="active">{{ $user->present()->nameOrEmail }}</li>
                     @else
                         <li class="active">@lang('app.activity_log')</li>
@@ -59,35 +59,41 @@
             <th class="text-center">@lang('app.more_info')</th>
         </thead>
         <tbody>
-            @foreach ($activities as $activity)
-                <tr>
-                    @if (isset($adminView))
-                        <td>
-                            @if (isset($user))
-                                {{ $activity->user->present()->nameOrEmail }}
-                            @else
-                                <a href="{{ route('activity.user', $activity->user_id) }}"
-                                    data-toggle="tooltip" title="@lang('app.view_activity_log')">
+            @if (count($activities))  
+                @foreach ($activities as $activity)
+                    <tr>
+                        @if (isset($adminView))
+                            <td>
+                                @if (isset($user))
                                     {{ $activity->user->present()->nameOrEmail }}
-                                </a>
-                            @endif
+                                @else
+                                    <a href="{{route('admin.activity.user',$activity->user_id)}}"
+                                        data-toggle="tooltip" title="@lang('app.view_activity_log')">
+                                        {{ $activity->user->present()->nameOrEmail }}
+                                    </a>
+                                @endif
+                            </td>
+                        @endif
+                        <td>{{ $activity->ip_address }}</td>
+                        <td>{{ $activity->description }}</td>
+                        <td>{{ $activity->created_at->format('Y-m-d H:i:s') }}</td>
+                        <td class="text-center">
+                            <a tabindex="0" role="button" class="btn btn-primary btn-circle"
+                            data-trigger="focus"
+                            data-placement="left"
+                            data-toggle="popover"
+                            title="@lang('app.user_agent')"
+                            data-content="{{ $activity->user_agent }}">
+                                <i class="fa fa-info"></i>
+                            </a>
                         </td>
-                    @endif
-                    <td>{{ $activity->ip_address }}</td>
-                    <td>{{ $activity->description }}</td>
-                    <td>{{ $activity->created_at->format('Y-m-d H:i:s') }}</td>
-                    <td class="text-center">
-                        <a tabindex="0" role="button" class="btn btn-primary btn-circle"
-                           data-trigger="focus"
-                           data-placement="left"
-                           data-toggle="popover"
-                           title="@lang('app.user_agent')"
-                           data-content="{{ $activity->user_agent }}">
-                            <i class="fa fa-info"></i>
-                        </a>
-                    </td>
-                </tr>
-            @endforeach
+                    </tr>
+                @endforeach
+            @else
+                <tr>
+	                <td colspan="6"><em>@lang('app.no_records_found')</em></td>
+	            </tr>
+            @endif
         </tbody>
     </table>
 
