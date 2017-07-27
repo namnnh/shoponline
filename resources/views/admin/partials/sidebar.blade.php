@@ -14,12 +14,31 @@
                     <i class="fa fa-dashboard fa-fw"></i> @lang('app.dashboard')
                 </a>
             </li>
-             @permission('users.manage')
-            <li class="{{ Request::is('admin/user*') ? 'active open' : ''  }}">
-                <a href="{{route('admin.user.list')}}" class="{{ Request::is('user*') ? 'active' : ''  }}">
-                    <i class="fa fa-users fa-fw"></i> @lang('app.users')
+            @permission(['users.manage','roles.manage', 'permissions.manage'])
+            <li class="{{ Request::is('admin/role*') || Request::is('admin/permission*') || Request::is('admin/user*') ? 'active' : ''  }}">
+                <a href="#">
+                    <i class="fa fa-users fa-fw"></i>
+                    @lang('app.user_manager')
+                    <span class="fa arrow"></span>
                 </a>
-            </li>
+                <ul class="nav nav-second-level collapse">
+                        <li class="{{ Request::is('admin/user*') ? 'active open' : ''  }}">
+                            <a href="{{route('admin.user.list')}}" class="{{ Request::is('user*') ? 'active' : ''  }}">
+                                <i class="fa fa-user fa-fw"></i> @lang('app.users')
+                            </a>
+                        </li>
+                        <li class="{{ Request::is('admin/role*') ? 'active open' : ''  }}">
+                            <a href="{{route('admin.role.index')}}" class="{{ Request::is('role*') ? 'active' : ''  }}">
+                                 <i class="fa fa-user-md fa-fw"></i> @lang('app.roles')
+                            </a>
+                        </li>
+                        <li class="{{ Request::is('admin/permission*') ? 'active open' : ''  }}">
+                            <a href="{{route('admin.permission.index')}}"
+                               class="{{ Request::is('permission*') ? 'active' : ''  }}">
+                               <i class="fa fa-user-secret fa-fw"></i> @lang('app.permissions')</a>
+                        </li>
+                </ul>
+            <li>
             @endpermission
 
             @permission('users.activity')
@@ -27,27 +46,6 @@
                 <a href="{{route('admin.activity.index')}}" class="{{ Request::is('activity*') ? 'active' : ''  }}">
                     <i class="fa fa-list-alt fa-fw"></i> @lang('app.activity_log')
                 </a>
-            </li>
-            @endpermission
-
-            @permission(['roles.manage', 'permissions.manage'])
-            <li class="{{ Request::is('admin/role*') || Request::is('admin/permission*') ? 'active' : ''  }}">
-                <a href="#">
-                    <i class="fa fa-user fa-fw"></i>
-                    @lang('app.roles_and_permissions')
-                    <span class="fa arrow"></span>
-                </a>
-                <ul class="nav nav-second-level collapse">
-                        <li class="{{ Request::is('admin/role*') ? 'active open' : ''  }}">
-                            <a href="{{route('admin.role.index')}}" class="{{ Request::is('role*') ? 'active' : ''  }}">
-                                @lang('app.roles')
-                            </a>
-                        </li>
-                        <li class="{{ Request::is('admin/permission*') ? 'active open' : ''  }}">
-                            <a href="{{route('admin.permission.index')}}"
-                               class="{{ Request::is('permission*') ? 'active' : ''  }}">@lang('app.permissions')</a>
-                        </li>
-                </ul>
             </li>
             @endpermission
             
@@ -79,6 +77,11 @@
                 </ul>
             </li>
             @endpermission
+            <li class="{{ Request::is('admin/media*') ? 'active open' : ''  }}">
+                <a href="{{route('admin.media.index')}}" class="{{ Request::is('media*') ? 'active' : ''  }}">
+                    <i class="fa fa-picture-o fa-fw"></i> @lang('app.media')
+                </a>
+            </li>
         </ul>
     </div>
     <!-- /.sidebar-collapse -->

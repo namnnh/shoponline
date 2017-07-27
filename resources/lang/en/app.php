@@ -5,6 +5,7 @@ return [
     'password' => 'Password',
     'active_sessions' => 'Active Sessions',
     'log_in' => 'Log in',
+    'user_manager' => 'User Manager',
     'login' => 'Login',
     'sign_up' => 'Sign Up',
     'logout' => 'Logout',
@@ -283,5 +284,9 @@ return [
     'terms_of_service' => 'Terms of Service',
     'close' => 'Close',
     'validate' => 'Validate',
+
+    //media
+    'media' => 'Media',
+    'file_manager' => 'File Manager'
 
 ];

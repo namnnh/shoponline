@@ -13,6 +13,8 @@
 
 Route::get('/','HomeController@index');
 
+Route::get('/demo','DemoController@index');
+
 Route::get('/product/{product}','ProductController@show');
 
 Route::get('/category/{category}','CategoryController@show');
@@ -50,6 +52,11 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/admin', [
         'as' => 'dashboard',
         'uses' => 'DashboardController@index'
+    ]);
+
+    Route::get('/admin/media', [
+        'as' => 'admin.media.index',
+        'uses' => 'Admin\MediaController@index'
     ]);
 
     /**
