@@ -46,7 +46,7 @@ return [
     'base_directory' => 'public',
 
     'images_folder_name' => 'photos',
-    'files_folder_name'  => 'files',
+    'files_folder_name'  => 'photos',
 
     'shared_folder_name' => 'shares',
     'thumb_folder_name'  => 'thumbs',
@@ -60,7 +60,7 @@ return [
     // The default display type for items.
     // Supported: "grid", "list"
     'images_startup_view' => 'grid',
-    'files_startup_view' => 'list',
+    'files_startup_view' => 'grid',
 
     /*
     |--------------------------------------------------------------------------

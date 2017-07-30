@@ -82,6 +82,11 @@
                     <i class="fa fa-picture-o fa-fw"></i> @lang('app.media')
                 </a>
             </li>
+            <li class="{{ Request::is('admin/category*') ? 'active open' : ''  }}">
+                <a href="{{route('admin.category')}}" class="{{ Request::is('category*') ? 'active' : ''  }}">
+                    <i class="fa fa-picture-o fa-fw"></i> @lang('app.category')
+                </a>
+            </li>
         </ul>
     </div>
     <!-- /.sidebar-collapse -->

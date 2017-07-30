@@ -60,12 +60,46 @@ Route::group(['middleware' => 'auth'], function () {
     ]);
 
     /**
+    * Category
+    */
+
+    Route::get('/admin/category',[
+        'as' => 'admin.category',
+        'uses' => 'Admin\CategoriesController@index'
+    ]);
+
+    Route::get('/admin/category/create', [
+        'as' => 'admin.category.create',
+        'uses' => 'Admin\CategoriesController@create'
+    ]);
+
+    Route::post('/admin/category/create', [
+        'as' => 'admin.category.store',
+        'uses' => 'Admin\CategoriesController@store'
+    ]);
+
+    Route::put('/admin/category/{category}/update', [
+        'as' => 'admin.category.update',
+        'uses' => 'Admin\CategoriesController@update'
+    ]);
+
+    Route::get('/admin/category/{category}/edit', [
+        'as' => 'admin.category.edit',
+        'uses' => 'Admin\CategoriesController@edit'
+    ]);
+
+    /**
      * User Profile
      */
 
     Route::get('/admin/profile/sessions', [
         'as' => 'admin.profile.sessions',
         'uses' => 'ProfileController@sessions'
+    ]);
+
+    Route::put('/admin/user/{user}/update/details', [
+        'as' => 'admin.user.update.details',
+        'uses' => 'Admin\UsersController@updateDetails'
     ]);
 
      /**

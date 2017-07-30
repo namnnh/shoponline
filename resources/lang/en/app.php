@@ -287,6 +287,22 @@ return [
 
     //media
     'media' => 'Media',
-    'file_manager' => 'File Manager'
+    'file_manager' => 'File Manager',
+
+    //category
+    'categories' => 'Categories',
+    'category' => 'Category',
+    'available_categories' => 'Available Categories',
+    'add_category' => 'Add Category',
+    'image' => 'Image',
+    'sort_order' => 'Sort Order',
+    'create_new_category' => 'Create New Category',
+    'category_details'=> 'category details',
+    'category_details_big' => 'Category Details',
+    'category_name' => 'Category Name',
+    'choose' => 'Choose',
+    'parent_id' => 'Category Parent',
+    'create_category' => 'Create Category',
+    'update_category' => 'Update Category'
 
 ];
