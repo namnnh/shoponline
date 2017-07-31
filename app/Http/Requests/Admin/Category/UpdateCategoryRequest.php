@@ -4,7 +4,7 @@ namespace App\Http\Requests\Admin\Category;
 
 use App\Http\Requests\Request;
 
-class CreateCategoryRequest extends Request
+class UpdateCategoryRequest extends Request
 {
     /**
      * Get the validation rules that apply to the request.
@@ -13,8 +13,10 @@ class CreateCategoryRequest extends Request
      */
     public function rules()
     {
+        $category = $this->route('category');
         return [
-            'name' => 'required|regex:/^[\w\s]+$/|unique:categories,name'
+            'name' => 'required|regex:/^[\w\s]+$/|unique:roles,name,' . $category->id
         ];
-    }
+     }
 }
+    

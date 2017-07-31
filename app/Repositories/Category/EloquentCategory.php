@@ -30,9 +30,19 @@ class EloquentCategory implements CategoryRepository
         return Category::all();
     }
 
+    public function find($id)
+    {
+        return Category::find($id);
+    }
+
     public function lists ($column = 'name', $key = 'id')
     {
         return Category::orderBy('name')->pluck($column,$key);
+    }
+
+    public function listsExpectItself ($expect, $column = 'name', $key = 'id')
+    {
+        return Category::where('id','!=',$expect)->orderBy('name')->pluck($column,$key);
     }
 
     public function create (array $data)
@@ -41,5 +51,17 @@ class EloquentCategory implements CategoryRepository
             $data['parent_id'] = null;
         }
         return Category::create($data);
+    }
+
+    public function update($id, array $data)
+    {
+        if (! array_get($data, 'parent_id')) {
+            $data['parent_id'] = null;
+        }
+        $category = $this->find($id);
+
+        $category->update($data);
+
+        return $category;
     }
 }

@@ -303,6 +303,10 @@ return [
     'choose' => 'Choose',
     'parent_id' => 'Category Parent',
     'create_category' => 'Create Category',
-    'update_category' => 'Update Category'
+    'update_category' => 'Update Category',
+    'edit_category_details' => 'edit category detail',
+    'category_created' => 'Category created successfully.',
+    'category_updated' => 'Category updated successfully',
+    'catalog_manager' => 'Catalog Manager'
 
 ];

@@ -23,7 +23,7 @@
 @include('admin.partials.messages')
 
 @if ($edit)
-    {!! Form::open(['route' => ['admin.category.update', $role->id], 'method' => 'PUT', 'id' => 'role-form']) !!}
+    {!! Form::open(['route' => ['admin.category.update', $category->id], 'method' => 'PUT', 'id' => 'role-form']) !!}
 @else
     {!! Form::open(['route' => 'admin.category.store', 'id' => 'role-form']) !!}
 @endif
@@ -72,7 +72,7 @@
         </button>
     </div>
 </div>
-@include('admin.partials.modal_Upload');
+<!-- @include('admin.partials.modal_Upload'); -->
 
 @stop
 @section('styles')
@@ -81,9 +81,9 @@
     
 @stop
  @section('scripts')
-     {!! HTML::script('vendor/laravel-filemanager/js/lfm.js') !!} 
-       @if ($edit)
-        {!! JsValidator::formRequest('App\Http\Requests\Admin\Role\UpdateRoleRequest', '#role-form') !!}
+    {!! HTML::script('vendor/laravel-filemanager/js/lfm.js') !!} 
+    @if ($edit)
+        {!! JsValidator::formRequest('App\Http\Requests\Admin\Category\UpdateCategoryRequest', '#role-form') !!}
     @else
         {!! JsValidator::formRequest('App\Http\Requests\Admin\Category\CreateCategoryRequest', '#role-form') !!}
     @endif   

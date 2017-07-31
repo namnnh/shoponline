@@ -48,6 +48,20 @@
                 </a>
             </li>
             @endpermission
+
+            <li class="{{ Request::is('admin/category*') ? 'active' : ''  }}">
+                <a href="#">
+                    <i class="fa fa-gear fa-fw"></i> @lang('app.catalog_manager')
+                    <span class="fa arrow"></span>
+                </a>
+                <ul class="nav nav-second-level collapse">
+                        <li class="{{ Request::is('admin/category*') ? 'active open' : ''  }}">
+                            <a href="{{route('admin.category')}}" class="{{ Request::is('category*') ? 'active' : ''  }}">
+                                <i class="fa fa-picture-o fa-fw"></i> @lang('app.category')
+                            </a>
+                        </li>
+                </ul>
+            </li>
             
             @permission(['settings.general', 'settings.auth', 'settings.notifications'])
             <li class="{{ Request::is('admin/settings*') ? 'active' : ''  }}">
@@ -80,11 +94,6 @@
             <li class="{{ Request::is('admin/media*') ? 'active open' : ''  }}">
                 <a href="{{route('admin.media.index')}}" class="{{ Request::is('media*') ? 'active' : ''  }}">
                     <i class="fa fa-picture-o fa-fw"></i> @lang('app.media')
-                </a>
-            </li>
-            <li class="{{ Request::is('admin/category*') ? 'active open' : ''  }}">
-                <a href="{{route('admin.category')}}" class="{{ Request::is('category*') ? 'active' : ''  }}">
-                    <i class="fa fa-picture-o fa-fw"></i> @lang('app.category')
                 </a>
             </li>
         </ul>
