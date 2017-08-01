@@ -307,6 +307,21 @@ return [
     'edit_category_details' => 'edit category detail',
     'category_created' => 'Category created successfully.',
     'category_updated' => 'Category updated successfully',
-    'catalog_manager' => 'Catalog Manager'
+    'catalog_manager' => 'Catalog Manager',
 
+    //Option
+    'option' => 'Option',
+    'available_option' => 'Available Option',
+    'add_option' => 'Add option',
+    'edit_option' => 'Edit Option',
+    'create_new_option' => 'Create New Option',
+    'option_details' => 'option details',
+    'option_details_big' => 'Option Detail',
+    'type' => 'Type',
+    'option_values_big' => 'Option Values',
+    'option_name' => 'Option Name',
+    'create_option' => 'Create Option',
+    'update_option' => 'Update Option',
+    'the_option_values_is_required' => 'The option values is required.',
+    'option_value_validate' => 'Option value item is required'
 ];

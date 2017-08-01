@@ -15,6 +15,8 @@ use App\Repositories\Activity\ActivityRepository;
 use App\Repositories\Activity\EloquentActivity;
 use App\Repositories\Category\CategoryRepository;
 use App\Repositories\Category\EloquentCategory;
+use App\Repositories\Option\OptionRepository;
+use App\Repositories\Option\EloquentOption;
 use App\Repositories\Session\SessionRepository;
 use App\Repositories\Session\DbSession;
 
@@ -44,5 +46,6 @@ class AppServiceProvider extends ServiceProvider
         $this->app->singleton(RoleRepository::class, EloquentRole::class);        
         $this->app->singleton(PermissionRepository::class, EloquentPermission::class);
         $this->app->singleton(CategoryRepository::class, EloquentCategory::class);
+        $this->app->singleton(OptionRepository::class, EloquentOption::class);
     }
 }

@@ -49,9 +49,9 @@
             </li>
             @endpermission
 
-            <li class="{{ Request::is('admin/category*') ? 'active' : ''  }}">
+            <li class="{{ Request::is('admin/category*')|| Request::is('admin/option*') ? 'active' : ''  }}">
                 <a href="#">
-                    <i class="fa fa-gear fa-fw"></i> @lang('app.catalog_manager')
+                    <i class="fa fa-tags fa-fw"></i> @lang('app.catalog_manager')
                     <span class="fa arrow"></span>
                 </a>
                 <ul class="nav nav-second-level collapse">
@@ -60,7 +60,18 @@
                                 <i class="fa fa-picture-o fa-fw"></i> @lang('app.category')
                             </a>
                         </li>
+                        <li class="{{ Request::is('admin/option*') ? 'active open' : ''  }}">
+                            <a href="{{route('admin.option')}}" class="{{ Request::is('option*') ? 'active' : ''  }}">
+                                <i class="fa fa-picture-o fa-fw"></i> @lang('app.option')
+                            </a>
+                        </li>
                 </ul>
+            </li>
+
+            <li class="{{ Request::is('admin/media*') ? 'active open' : ''  }}">
+                <a href="{{route('admin.media.index')}}" class="{{ Request::is('media*') ? 'active' : ''  }}">
+                    <i class="fa fa-picture-o fa-fw"></i> @lang('app.media')
+                </a>
             </li>
             
             @permission(['settings.general', 'settings.auth', 'settings.notifications'])
@@ -91,11 +102,6 @@
                 </ul>
             </li>
             @endpermission
-            <li class="{{ Request::is('admin/media*') ? 'active open' : ''  }}">
-                <a href="{{route('admin.media.index')}}" class="{{ Request::is('media*') ? 'active' : ''  }}">
-                    <i class="fa fa-picture-o fa-fw"></i> @lang('app.media')
-                </a>
-            </li>
         </ul>
     </div>
     <!-- /.sidebar-collapse -->

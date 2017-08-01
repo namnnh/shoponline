@@ -89,6 +89,36 @@ Route::group(['middleware' => 'auth'], function () {
     ]);
 
     /**
+    *   Option
+    */
+
+    Route::get('/admin/option',[
+        'as' => 'admin.option',
+        'uses' => 'Admin\OptionController@index'
+    ]);
+
+    Route::get('/admin/option/create', [
+        'as' => 'admin.option.create',
+        'uses' => 'Admin\OptionController@create'
+    ]);
+
+    Route::post('/admin/option/create', [
+        'as' => 'admin.option.store',
+        'uses' => 'Admin\OptionController@store'
+    ]);
+
+    Route::put('/admin/option/{option}/update', [
+        'as' => 'admin.option.update',
+        'uses' => 'Admin\OptionController@update'
+    ]);
+
+    Route::get('/admin/option/{option}/edit', [
+        'as' => 'admin.option.edit',
+        'uses' => 'Admin\OptionController@edit'
+    ]);
+
+
+    /**
      * User Profile
      */
 

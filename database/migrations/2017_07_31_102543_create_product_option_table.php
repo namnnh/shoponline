@@ -15,8 +15,8 @@ class CreateProductOptionTable extends Migration
     {
         Schema::create('product_option', function (Blueprint $table) {
             $table->increments('id')->unsigned();
-            $table->integer('product_id')->unsinged();
-            $table->integer('option_id')->unsinged();
+            $table->integer('product_id')->unsigned();
+            $table->integer('option_id')->unsigned();
             $table->mediumText('value');
             $table->boolean('required');
 

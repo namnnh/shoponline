@@ -1,18 +1,18 @@
 @extends('admin.layouts.app')
 
-@section('page-title', trans('app.categories'))
+@section('page-title', trans('app.option'))
 
 @section('content')
 
     <div class="row">
         <div class="col-lg-12">
             <h1 class="page-header">
-                @lang('app.categories')
-                <small>@lang('app.available_categories')</small>
+                @lang('app.option')
+                <small>@lang('app.available_option')</small>
                 <div class="pull-right">
                     <ol class="breadcrumb">
                         <li><a href="{{ route('dashboard') }}">@lang('app.home')</a></li>
-                        <li class="active">@lang('app.categories')</li>
+                        <li class="active">@lang('app.option')</li>
                     </ol>
                 </div>
 
@@ -24,9 +24,9 @@
 
     <div class="row tab-search">
         <div class="col-md-2">
-            <a href="{{ route('admin.category.create') }}" class="btn btn-success">
+            <a href="{{ route('admin.option.create') }}" class="btn btn-success">
                 <i class="glyphicon glyphicon-plus"></i>
-                @lang('app.add_category')
+                @lang('app.add_option')
             </a>
         </div>
     </div>
@@ -36,20 +36,18 @@
         <table class="table">
             <thead>
                 <th>@lang('app.name')</th>
-                <th>@lang('app.image')</th>
                 <th>@lang('app.sort_order')</th>
                 <th class="text-center">@lang('app.action')</th>
                 </thead>
             <tbody>
-            @if (count($categories))
-                @foreach ($categories as $category)
+            @if (count($options))
+                @foreach ($options as $option)
                     <tr>
-                        <td>{{ $category->name }}</td>
-                        <td>{{ $category->image }}</td>
-                        <td>{{ $category->sort_order }}</td>
+                        <td>{{ $option->name }}</td>
+                        <td>{{ $option->sort_order }}</td>
                         <td class="text-center">
-                            <a href="{{ route('admin.category.edit', $category->id) }}" class="btn btn-primary btn-circle"
-                               title="@lang('app.edit_role')" data-toggle="tooltip" data-placement="top">
+                            <a href="{{ route('admin.option.edit', $option->id) }}" class="btn btn-primary btn-circle"
+                               title="@lang('app.edit_option')" data-toggle="tooltip" data-placement="top">
                                 <i class="glyphicon glyphicon-edit"></i>
                             </a>
                             {{--  @if ($role->removable)
