@@ -117,6 +117,11 @@ Route::group(['middleware' => 'auth'], function () {
         'uses' => 'Admin\OptionController@edit'
     ]);
 
+    Route::delete('/admin/option/{option}/delete', [
+        'as' => 'admin.option.delete',
+        'uses' => 'Admin\OptionController@delete'
+    ]);
+
 
     /**
      * User Profile

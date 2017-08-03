@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Input;
 use App\Repositories\Option\OptionRepository;
 use App\Http\Requests\Admin\Option\CreateOptionRequest;
+use App\Http\Requests\Admin\Option\UpdateOptionRequest;
 use App\Option;
 use Validator;
 
@@ -36,25 +37,23 @@ class OptionController extends Controller
     {
         $data = $request->all();
         $this->checkOptionValue($data['option_value']);
-        // $this->categories->create($data);
-        // return redirect()->route('admin.category')
-        //     ->withSuccess(trans('app.category_created'));
-        dd($request->all());
+        $this->options->create($data);
+        return redirect()->route('admin.option')
+            ->withSuccess(trans('app.option_created'));
     }
 
-    // public function edit(Category $category)
-    // {
-    //     $edit = true;
-    //     $categories = $this->parseCategories($this->categories,$category->id);
-    //     return view('admin.category.add-edit',compact('edit','category','categories'));
-    // }
+    public function edit(Option $option)
+    {
+        $edit = true;
+        return view('admin.option.add-edit',compact('edit','option'));
+    }
 
-    // public function update(Category $category,UpdateCategoryRequest $request)
-    // {
-    //     $this->categories->update($category->id,$request->all());
-    //     return redirect()->route('admin.category')
-    //         ->withSuccess(trans('app.category_updated'));
-    // }
+    public function update(Option $option,UpdateOptionRequest $request)
+    {
+        $this->options->update($option->id,$request->all());
+        return redirect()->route('admin.category')
+            ->withSuccess(trans('app.category_updated'));
+    }
 
     /**
 	* Private function

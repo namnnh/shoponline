@@ -323,5 +323,6 @@ return [
     'create_option' => 'Create Option',
     'update_option' => 'Update Option',
     'the_option_values_is_required' => 'The option values is required.',
-    'option_value_validate' => 'Option value item is required'
+    'option_value_validate' => 'Option value item is required',
+    'option_created' => 'Option created successfully.',
 ];

@@ -36,6 +36,7 @@
         <table class="table">
             <thead>
                 <th>@lang('app.name')</th>
+                <th>@lang('app.type')</th>
                 <th>@lang('app.sort_order')</th>
                 <th class="text-center">@lang('app.action')</th>
                 </thead>
@@ -44,24 +45,23 @@
                 @foreach ($options as $option)
                     <tr>
                         <td>{{ $option->name }}</td>
+                        <td>{{ $option->type }}</td>
                         <td>{{ $option->sort_order }}</td>
                         <td class="text-center">
                             <a href="{{ route('admin.option.edit', $option->id) }}" class="btn btn-primary btn-circle"
                                title="@lang('app.edit_option')" data-toggle="tooltip" data-placement="top">
                                 <i class="glyphicon glyphicon-edit"></i>
                             </a>
-                            {{--  @if ($role->removable)
-                                <a href="{{ route('admin.role.delete', $role->id) }}" class="btn btn-danger btn-circle"
-                                   title="@lang('app.delete_role')"
-                                   data-toggle="tooltip"
-                                   data-placement="top"
-                                   data-method="DELETE"
-                                   data-confirm-title="@lang('app.please_confirm')"
-                                   data-confirm-text="@lang('app.are_you_sure_delete_role')"
-                                   data-confirm-delete="@lang('app.yes_delete_it')">
-                                    <i class="glyphicon glyphicon-trash"></i>
-                                </a>
-                            @endif  --}}
+                            <a href="{{ route('admin.option.delete', $option->id) }}" class="btn btn-danger btn-circle"
+                               title="@lang('app.delete_role')"
+                               data-toggle="tooltip"
+                               data-placement="top"
+                               data-method="DELETE"
+                               data-confirm-title="@lang('app.please_confirm')"
+                               data-confirm-text="@lang('app.are_you_sure_delete_role')"
+                               data-confirm-delete="@lang('app.yes_delete_it')">
+                                <i class="glyphicon glyphicon-trash"></i>
+                            </a>
                         </td>
                     </tr>
                 @endforeach

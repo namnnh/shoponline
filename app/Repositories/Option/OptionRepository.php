@@ -12,9 +12,9 @@ interface OptionRepository
 
     // public function lists ($column = 'name', $key = 'id');
 
-    // public function create (array $data);
+    public function create (array $data);
 
     // public function listsExpectItself ($expect , $column = 'name', $key = 'id');
 
-    // public function update($id, array $data);
+    public function update($id, array $data);
 }

@@ -7,7 +7,7 @@
 <div class="row">
     <div class="col-lg-12">
         <h1 class="page-header">
-            {{ $edit ? $role->name : trans('app.create_new_option') }}
+            {{ $edit ? $option->name : trans('app.create_new_option') }}
             <small>{{ $edit ? trans('app.edit_role_details') : trans('app.option_details') }}</small>
             <div class="pull-right">
                 <ol class="breadcrumb">
@@ -36,13 +36,13 @@
                 <div class="form-group">
                     <label for="name">@lang('app.name')</label>
                     <input type="text" class="form-control" id="name"
-                           name="name" placeholder="@lang('app.option_name')" value="{{ $edit ? $role->name : old('name') }}">
+                           name="name" placeholder="@lang('app.option_name')" value="{{ $edit ? $option->name : old('name') }}">
                 </div>
                 <div class="form-group">
                     <label for="display_name">@lang('app.type')</label>
-                    <select name="type" id="input-type" class="form-control">
+                    <select name="type" id="input-type" class="form-control" value="radio">
 						<optgroup label="Choose">
-						<option value="select" selected="selected">Select</option>
+						<option value="select">Select</option>
 						<option value="radio">Radio</option>
 						<option value="checkbox">Checkbox</option>
 						</optgroup>
@@ -63,7 +63,7 @@
                 <div class="form-group">
                     <label for="description">@lang('app.sort_order')</label>
                     <input type="number" class="form-control" id="sort_order"
-                           name="sort_order" placeholder="@lang('app.sort_order')" value="{{ $edit ? $role->sort_order : old('sort_order') }}">
+                           name="sort_order" placeholder="@lang('app.sort_order')" value="{{ $edit ? $option->sort_order : old('sort_order') }}">
                 </div>
             </div>
         </div>
@@ -81,7 +81,25 @@
 							<td></td>
 						</tr>
 					</thead>
-					<tbody></tbody>
+					<tbody>
+                        @if($edit)
+                            @foreach($option->optionValues as $key => $value)
+                            <tr id="option-value-row{{$key}}">
+                                <td class="text-right">
+                                    <input type="hidden" name="option_value[{{$key}}][id]" value="{{$value->id}}" />
+                                    <input type="text" name="option_value[{{$key}}][name]" value="{{$value->name}}" placeholder="Option Value Name" class="form-control"/>
+                                </td>
+                                <td class="text-right">
+                                    <input type="text" name="option_value[{{$key}}][sort_order]" value="{{$value->sort_order}}" placeholder="Sort Order" class="form-control" />
+                                </td>
+                                <td class="text-right">
+                                    <button type="button" onclick="$('#option-value-row{{$value->id}}').remove();" data-toggle="tooltip" title="Remove" class="btn btn-danger"><i class="fa fa-minus-circle"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                            @endforeach
+                        @endif           
+                    </tbody>
 					<tfoot>
 						<tr>
 							<td colspan="2"></td>
@@ -106,13 +124,13 @@
 @stop
 
 @section('scripts')
-      <!-- @if ($edit)
-        {!! JsValidator::formRequest('App\Http\Requests\Admin\Role\UpdateRoleRequest', '#option-form') !!}
-    @else
-        {!! JsValidator::formRequest('App\Http\Requests\Admin\Option\CreateOptionRequest', '#option-form') !!}
-    @endif -->
+     
     <script>
-    	var option_value_row = 0;
+        var option_value_row = 0;
+        @if($edit)
+            document.getElementById('input-type').value='{{$option->type}}';
+            option_value_row = {{count($option->optionValues)}};
+        @endif
 
 		function addOptionValue() {
 			html  = '<tr id="option-value-row' + option_value_row + '">';

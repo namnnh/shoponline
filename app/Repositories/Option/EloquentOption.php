@@ -2,6 +2,7 @@
 namespace App\Repositories\Option;
 
 use App\Option;
+use DB;
 
 class EloquentOption implements OptionRepository
 {
@@ -44,23 +45,32 @@ class EloquentOption implements OptionRepository
     //     return Category::where('id','!=',$expect)->orderBy('name')->pluck($column,$key);
     // }
 
-    // public function create (array $data)
-    // {
-    //      if (! array_get($data, 'parent_id')) {
-    //         $data['parent_id'] = null;
-    //     }
-    //     return Category::create($data);
-    // }
+    public function create (array $data)
+    {
+        $option_value = $data['option_value'];
+        unset($data['option_value']);
+        DB::transaction(function () use($data,$option_value) {
+            $option = Option::create($data);
+            $option->optionValues()->createMany($option_value);
+            if( !$option )
+            {
+                throw new \Exception('User not created for account');
+            }
+        });
+        return $option;
+    }
 
-    // public function update($id, array $data)
-    // {
-    //     if (! array_get($data, 'parent_id')) {
-    //         $data['parent_id'] = null;
-    //     }
-    //     $category = $this->find($id);
+    public function update($id, array $data)
+    {
+        $option_value = $data['option_value'];
+        unset($data['option_value']);
 
-    //     $category->update($data);
+        $option = Option::find($id);
 
-    //     return $category;
-    // }
+        $option->update($data);
+
+        $option->optionValues()->saveMany($option_value);
+
+        return $option;
+    }
 }
