@@ -93,7 +93,7 @@
                                     <input type="text" name="option_value[{{$key}}][sort_order]" value="{{$value->sort_order}}" placeholder="Sort Order" class="form-control" />
                                 </td>
                                 <td class="text-right">
-                                    <button type="button" onclick="$('#option-value-row{{$value->id}}').remove();" data-toggle="tooltip" title="Remove" class="btn btn-danger"><i class="fa fa-minus-circle"></i>
+                                    <button type="button" onclick="$('#option-value-row{{$key}}').remove();" data-toggle="tooltip" title="Remove" class="btn btn-danger"><i class="fa fa-minus-circle"></i>
                                     </button>
                                 </td>
                             </tr>

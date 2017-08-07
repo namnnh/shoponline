@@ -51,8 +51,17 @@ class OptionController extends Controller
     public function update(Option $option,UpdateOptionRequest $request)
     {
         $this->options->update($option->id,$request->all());
-        return redirect()->route('admin.category')
-            ->withSuccess(trans('app.category_updated'));
+        return redirect()->route('admin.option')
+            ->withSuccess(trans('app.option_updated'));
+    }
+
+    public function delete(Option $option)
+    {
+
+        $this->options->delete($option->id);
+
+        return redirect()->route('admin.option')
+            ->withSuccess(trans('app.option_deleted'));
     }
 
     /**

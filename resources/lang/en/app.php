@@ -325,4 +325,6 @@ return [
     'the_option_values_is_required' => 'The option values is required.',
     'option_value_validate' => 'Option value item is required',
     'option_created' => 'Option created successfully.',
+    'option_updated' => 'Option updated successfully.',
+    'option_deleted' => 'Option deleted successfully.',
 ];

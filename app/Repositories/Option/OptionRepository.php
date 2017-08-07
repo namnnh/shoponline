@@ -17,4 +17,6 @@ interface OptionRepository
     // public function listsExpectItself ($expect , $column = 'name', $key = 'id');
 
     public function update($id, array $data);
+
+    public function delete($id);
 }

@@ -30,10 +30,10 @@ class EloquentOption implements OptionRepository
     //     return Category::all();
     // }
 
-    // public function find($id)
-    // {
-    //     return Category::find($id);
-    // }
+    public function find($id)
+    {
+        return Option::find($id);
+    }
 
     // public function lists ($column = 'name', $key = 'id')
     // {
@@ -65,12 +65,24 @@ class EloquentOption implements OptionRepository
         $option_value = $data['option_value'];
         unset($data['option_value']);
 
-        $option = Option::find($id);
+        DB::transaction(function () use($id,$data,$option_value) {
+            $option = Option::find($id);
 
-        $option->update($data);
+            $option->update($data);
 
-        $option->optionValues()->saveMany($option_value);
+            $option->optionValues()->delete();
+            $option->optionValues()->createMany($option_value);
+            if( !$option )
+            {
+                throw new \Exception('Cannot update Option');
+            }
+        });
 
-        return $option;
+        return true;
     }
+
+     public function delete($id){
+        $option = $this->find($id);
+        return $option->delete();
+     }
 }

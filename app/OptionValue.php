@@ -11,5 +11,5 @@ class OptionValue extends Model
 
     public $timestamps = false;
 
-    protected $fillable = ['name', 'sort_order'];
+    protected $fillable = ['name', 'sort_order','id'];
 }
