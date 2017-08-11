@@ -10,10 +10,26 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+use App\Repositories\Article\ArticleRepository;
 
 Route::get('/','HomeController@index');
 
 Route::get('/demo','DemoController@index');
+
+//for demo elasticsearch
+Route::get('/articles', function () {
+    return view('articles.index', [
+        'articles' => App\Article::all(),
+    ]);
+});
+
+Route::get('/articles/search', function (ArticleRepository $repository) {
+    $articles = $repository->search((string) request('q'));
+
+    return view('articles.index', [
+        'articles' => $articles,
+    ]);
+});
 
 Route::get('/product/{product}','ProductController@show');
 

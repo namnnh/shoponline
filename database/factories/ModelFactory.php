@@ -15,6 +15,7 @@
 use App\Country;
 use App\Services\Logging\UserActivity\Activity;
 use App\Support\Enum\UserStatus;
+use App\Article;
 
 $factory->define(App\User::class, function (Faker\Generator $faker, array $attrs) {
 
@@ -76,5 +77,18 @@ $factory->define(Country::class, function (Faker\Generator $faker) {
         'name' => $faker->country,
         'region_code' => 123,
         'sub_region_code' => 123
+    ];
+});
+
+$factory->define(Article::class, function (Faker\Generator $faker) {
+    $tags = collect(['php', 'ruby', 'java', 'javascript', 'bash'])
+        ->random(2)
+        ->values()
+        ->all();
+
+    return [
+        'title' => $faker->sentence,
+        'body' => $faker->text,
+        'tags' => $tags
     ];
 });

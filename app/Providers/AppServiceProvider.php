@@ -19,6 +19,11 @@ use App\Repositories\Option\OptionRepository;
 use App\Repositories\Option\EloquentOption;
 use App\Repositories\Session\SessionRepository;
 use App\Repositories\Session\DbSession;
+use App\Repositories\Article\ArticleRepository;
+use App\Repositories\Article\EloquentArticle;
+use App\Repositories\Article\ElasticsearchArticle;
+use Elasticsearch\Client;
+use Elasticsearch\ClientBuilder;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -47,5 +52,23 @@ class AppServiceProvider extends ServiceProvider
         $this->app->singleton(PermissionRepository::class, EloquentPermission::class);
         $this->app->singleton(CategoryRepository::class, EloquentCategory::class);
         $this->app->singleton(OptionRepository::class, EloquentOption::class);
+        $this->app->singleton(ArticleRepository::class, function($app) {
+            if (!config('services.search.enabled')) {
+                return new EloquentArticle();
+            }
+
+            return new ElasticsearchArticle(
+                $app->make(Client::class)
+            );
+        });
+        $this->bindSearchClient();
+    }
+    private function bindSearchClient()
+    {
+        $this->app->bind(Client::class, function ($app) {
+            return ClientBuilder::create()
+                ->setHosts(config('services.search.hosts'))
+                ->build();
+        });
     }
 }
