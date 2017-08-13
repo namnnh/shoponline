@@ -37,6 +37,7 @@ class ElasticsearchArticle implements ArticleRepository
                 ],
             ],
         ]);
+        dd($items);
 
         return $items;
     }

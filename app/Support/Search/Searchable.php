@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Support\Search;
+use Config;
 
 trait Searchable
 {
@@ -13,7 +14,7 @@ trait Searchable
 
     public function getSearchIndex()
     {
-        return $this->getTable();
+        return Config::get('database.connections.'.Config::get('database.default').'.database');
     }
 
     public function getSearchType()

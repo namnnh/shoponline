@@ -11,6 +11,7 @@
 |
 */
 use App\Repositories\Article\ArticleRepository;
+use Illuminate\Support\Facades\Redis;
 
 Route::get('/','HomeController@index');
 
@@ -29,6 +30,11 @@ Route::get('/articles/search', function (ArticleRepository $repository) {
     return view('articles.index', [
         'articles' => $articles,
     ]);
+});
+
+//for demo redis
+Route::get('/redis', function () {
+    return Cache::get('foo');
 });
 
 Route::get('/product/{product}','ProductController@show');
