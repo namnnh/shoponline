@@ -12,7 +12,7 @@
 		    <div class="panel-body">
 		        <div class="row">
 		            <div class="container">
-		                <form action="{{ url('articles/search') }}" method="get">
+		                <form action="{{ url('/demo/articles/search') }}" method="get">
 		                    <div class="form-group">
 		                        <input
 		                                type="text"

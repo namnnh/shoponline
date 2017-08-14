@@ -12,29 +12,37 @@
 */
 use App\Repositories\Article\ArticleRepository;
 use Illuminate\Support\Facades\Redis;
+use App\Events\UserSignedUp;
 
 Route::get('/','HomeController@index');
 
 Route::get('/demo','DemoController@index');
 
 //for demo elasticsearch
-Route::get('/articles', function () {
-    return view('articles.index', [
+Route::get('/demo/articles', function () {
+    return view('demo.articles.index', [
         'articles' => App\Article::all(),
     ]);
 });
 
-Route::get('/articles/search', function (ArticleRepository $repository) {
+Route::get('/demo/articles/search', function (ArticleRepository $repository) {
     $articles = $repository->search((string) request('q'));
 
-    return view('articles.index', [
+    return view('demo.articles.index', [
         'articles' => $articles,
     ]);
 });
 
 //for demo redis
-Route::get('/redis', function () {
-    return Cache::get('foo');
+Route::get('/demo/redis', function () {
+    Redis::set('name', 'Taylor');
+    return Redis::get('name');
+});
+
+//for demo socket io
+Route::get('/demo/socket',function(){
+    event(new UserSignedUp(App\User::find(1)));
+    return view('demo.socket.index');
 });
 
 Route::get('/product/{product}','ProductController@show');
